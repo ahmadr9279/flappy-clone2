@@ -2,16 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flappy Clone</title>
+    <style>
+      /* Remove margins and prevent scrolling/bouncing on mobile */
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed; 
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/addons/p5.sound.min.js"></script>
   </head>
   
   <body>
-    <!-- RESTART BUTTON ADDED HERE -->
-    <button id="restartBtn" style="display: none; position: absolute; top: 300px; left: 200px; transform: translate(-50%, -50%); padding: 15px 30px; font-size: 24px; font-family: sans-serif; cursor: pointer; background-color: white; border: 3px solid green; border-radius: 8px; z-index: 10;">Restart</button>
+    <!-- Button is now centered using percentages (50%) instead of pixels -->
+    <button id="restartBtn" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 15px 30px; font-size: 24px; font-family: sans-serif; cursor: pointer; background-color: white; border: 3px solid green; border-radius: 8px; z-index: 10;">Restart</button>
     
     <script src="script.js"></script>
     <script src="bird.js"></script>
