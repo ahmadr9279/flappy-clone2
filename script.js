@@ -2,7 +2,7 @@ var bird;
 var pipes = [];
 var score = 0;
 var bubbles = [];
-var restartBtn; // New variable for our button
+var restartBtn;
 
 function setup() {
   createCanvas(400, 600);
@@ -96,6 +96,8 @@ function resetGame() {
   pipes = [];             // Clear all existing pipes
   pipes.push(new Pipe()); // Add the starting pipe back
   score = 0;              // Reset the score back to 0
+
+  frameCount = 0;
   
   restartBtn.style.display = 'none'; // Hide the button again
   loop(); // Resume the p5.js draw loop (which was stopped by noLoop in pipe.js)
