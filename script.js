@@ -85,7 +85,13 @@ function keyPressed(){
   }
 }
 
-function touchStarted(){
+function touchStarted(event) {
+  // If the user tapped the restart button, allow the normal click to happen
+  if (event && event.target.id === 'restartBtn') {
+    return true; 
+  }
+  
+  // Otherwise, make the bird jump and stop the screen from scrolling
   bird.up();
   return false;
 }
