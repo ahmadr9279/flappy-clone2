@@ -1,14 +1,20 @@
 var bird;
 var pipes = [];
-var score= 0;
+var score = 0;
 var bubbles = [];
+var restartBtn; // New variable for our button
+
 function setup() {
   createCanvas(400, 600);
-  bird= new Bird();
+  bird = new Bird();
   pipes.push(new Pipe());
   for (var i = 0; i < 4; i++) {
-  bubbles[i] = new Bubble(); 
+    bubbles[i] = new Bubble(); 
   }
+  
+  // Grab the button from HTML and listen for clicks
+  restartBtn = document.getElementById('restartBtn');
+  restartBtn.addEventListener('click', resetGame);
 }
 
 function draw() {
@@ -19,39 +25,39 @@ function draw() {
     bubbles[i].display();
   }
 
-  for (var i= pipes.length-1; i>=0; i--){
+  for (var i = pipes.length-1; i >= 0; i--){
     pipes[i].show();
     pipes[i].update();
 
     if(pipes[i].hits(bird)){
-      console.log("HIT")
+      console.log("HIT");
+      // Show the button when the game is over
+      restartBtn.style.display = 'block'; 
     }
 
     if (pipes[i].offscreen()){
       pipes.splice(i,1);
     }
-
   }
 
   bird.update();
   bird.show();
 
-  if (frameCount% 50 ==0) {
+  if (frameCount % 50 == 0) {
     pipes.push(new Pipe());
   }
-fill ("white");
-textSize(21);
-text("score: "+ score,10,20);
   
+  fill("white");
+  textSize(21);
+  text("score: "+ score, 10, 20);
 }
-
 
 function Bubble(){
   this.x = random(0, width);
   this.y = random(0, height);
   
   this.display = function() {
-   stroke(226);
+    stroke(226);
     strokeWeight(1);
     fill(226);
     ellipse(this.x, this.y, 24, 24);
@@ -67,7 +73,7 @@ function Bubble(){
     this.y = this.y + random(-1, 1);
     
     if(this.x >= width){
-    this.x = 0;
+      this.x = 0;
     }
   }
 }
@@ -80,6 +86,17 @@ function keyPressed(){
 }
 
 function touchStarted(){
-      bird.up();
-      return false;
+  bird.up();
+  return false;
+}
+
+// --- NEW FUNCTION TO RESTART THE GAME ---
+function resetGame() {
+  bird = new Bird();      // Reset bird position and velocity
+  pipes = [];             // Clear all existing pipes
+  pipes.push(new Pipe()); // Add the starting pipe back
+  score = 0;              // Reset the score back to 0
+  
+  restartBtn.style.display = 'none'; // Hide the button again
+  loop(); // Resume the p5.js draw loop (which was stopped by noLoop in pipe.js)
 }
